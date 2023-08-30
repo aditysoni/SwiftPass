@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import  './details.css' ;
 
+
   const Details = () => {
     
     const [value , setValue] = useState("") ;
   const [students, setStudents] = useState([]);
   const [error, setError] = useState(null);
+
   const [input , setInput] = useState("") ;
+
 const removePass = async(id) => 
 {
       try
@@ -42,7 +45,10 @@ const removePass = async(id) =>
 }
 catch(err)
 {
+
   
+   async function fetchData() 
+
         console.log(error);
         setError("Sorry");
 
@@ -51,6 +57,7 @@ catch(err)
 }
   
    async function fetchData(e) 
+
    {
       try {
         console.log("requested") ;

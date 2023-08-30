@@ -21,22 +21,19 @@ const Login =() =>
       const handlePasswordChange = (e) => {
         setPassword(e.target.value);
       };
-    
+      const config = {
+        headers: {"Content-Type" : "application/json"} ,
+        withCredentials:true 
+      }
       const handleLogin = async () => {
         try {
             const data = { username, password };
-            const savedUserResponse = await fetch(
-              "http://localhost:8001/auth/login",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-              }
-
-             
+            const savedUserResponse = await axios.post(
+              "http://localhost:8001/auth/login", data , 
+              config
             );
             console.log(savedUserResponse) ;
-            alert(JSON.stringify(savedUserResponse)) ;
+           Navigate("http://localhost:3000/generate")
             // alert(savedUserResponse) ;
             
             
