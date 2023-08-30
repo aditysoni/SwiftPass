@@ -3,9 +3,11 @@ import axios from 'axios';
 import  './details.css' ;
 
   const Details = () => {
+    
+    const [value , setValue] = useState("") ;
   const [students, setStudents] = useState([]);
   const [error, setError] = useState(null);
-
+  const [input , setInput] = useState("") ;
 const removePass = async(id) => 
 {
       try
@@ -20,21 +22,50 @@ const removePass = async(id) =>
          setError("error");
       }
   }
+
+  async function searching(e) 
+{  
+  try {
   
-   async function fetchData() 
+    setInput(e.target.value) ;
+    const response = await axios.get('http://localhost:8001/students');
+    const  results = response.data.body.filter((response) =>
+  {
+        return response && response.name &&response.name.toLowerCase().includes(input.toLowerCase()) ;
+
+  })
+
+  // setInput(e.target.value) ;
+  console.log(results) ;
+  setStudents(results) ;
+  console.log("hey yeah");
+}
+catch(err)
+{
+  
+        console.log(error);
+        setError("Sorry");
+
+}
+
+}
+  
+   async function fetchData(e) 
    {
       try {
-        console.log("requested")
-        const response = await axios.get('http://localhost:8000/students');
-        setStudents(response.data.body);
+        console.log("requested") ;
+        // setInput(e.target.value) ;
+        const response = await axios.get('http://localhost:8001/students');
         console.log(response) ;
+        setStudents(response.data.body);
+       
       } 
         catch (error) {
         console.log(error);
         setError("Sorry");
       }
     }
-
+    
 
   useEffect( () => {
     fetchData();
@@ -42,11 +73,14 @@ const removePass = async(id) =>
 
   return (
     <div>
+      <div>
+      <input placeholder='serach'value={input} onChange= {searching}/>
+      </div>
       {error ? (
-        <div>{error}</div>
+        <div className='error-box'>{error}</div>
       ) : (
         <table>
-        <div  > 
+        <div> 
           
         {students.map(student => (
          <div  key={student._id}> 
@@ -74,8 +108,11 @@ const removePass = async(id) =>
       ))}
         </div>
         </table>
+        
       )}
     </div>
+    
+    
    
   );
 };

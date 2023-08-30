@@ -23,7 +23,12 @@
  padding: 10px;
 }
 
-
+.error-box 
+{
+   font-size: 100px ;
+   color:whitesmoke;
+   
+}
 
 
 table
