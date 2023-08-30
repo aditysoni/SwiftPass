@@ -82,7 +82,7 @@ const Generate = async (req, res) =>
        {   
           const user = Pass.findById(user_id) ;
            const newPass = new Pass ({
-           name : user.name , 
+           name : StudentName , 
            rollNo : user.rollNo , 
            purpose: req.body.purpose , 
            email:  user.email , 
