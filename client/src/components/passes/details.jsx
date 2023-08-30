@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import  './details.css' ;
 
+
   const Details = () => {
   const [students, setStudents] = useState([]);
   const [error, setError] = useState(null);
+
 
 const removePass = async(id) => 
 {
@@ -20,6 +22,7 @@ const removePass = async(id) =>
          setError("error");
       }
   }
+  
   
    async function fetchData() 
    {

@@ -4,6 +4,8 @@ import './homeStud.css' ;
 import { BrowserRouter as Router , Route , Routes  } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector} from 'react-redux/es/hooks/useSelector';
+
+
 const HomeStu = ( ) =>  {
     const navigate = useNavigate() ; 
     const rollNo = "20ume003";
@@ -22,24 +24,26 @@ const HomeStu = ( ) =>  {
       setRettime(e.target.value);
     };
 
+    
     const onSubmitForm = async(e) => 
     {
       e.preventDefault() ;  
       const data  = {studentname , rollNo , email, purpose , returnTime} ;
-      const res = await axios.post('http://localhost:8000/generate' , data ) ;
+      const res = await axios.post('http://localhost:8001/generate' , data ) ;
       alert("successfully generated the outpass") ;
       res.json("saved ur ass") ;
     }
    useEffect( async ()=>
    {  
-    console.log("lets get the cookie") ;
-    const student = await axios.get(`http://localhost:8001/generate`) ;
+     console.log("lets get the cookie") ;
+     const student = await axios.get(`http://localhost:8001/generate` , {header:"application/json"}) ;
      console.log("coo kie ") ;
      console.log(student.data.name) ;
       setuserId(student.data.cookies) ;
       setName(student.data.name);
    } , [])
-    return (
+   
+   return (
       <div className = 'login-box'>
          <div className='user-box'>
          <div className="header"> 

@@ -10,7 +10,10 @@ const app = express();
 const student = require('./model/StudentSchema')
 const userRouter = express.Router() ;
 app.use(express.json()) ;
-app.use(cors());
+app.use("*" , cors({
+  origin:true , 
+  credentials:true ,
+})) ;
 app.use(cookieParser()) ;
 // Connection() ;
 const PORT = 8001;
@@ -47,8 +50,7 @@ const Login = async (req, res) =>
        
            return res.json(
           {
-           messege:'user has logged in' ,
-           userDetails:token
+            user
           }
         ) ;
        }
@@ -79,7 +81,6 @@ const Generate = async (req, res) =>
        if (user_id)
        {   
           const user = Pass.findById(user_id) ;
-
            const newPass = new Pass ({
            name : user.name , 
            rollNo : user.rollNo , 
