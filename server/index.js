@@ -40,19 +40,18 @@ const Login = async (req, res) =>
        if(user.password == data.password)
        {
         console.log("heloo") ;
-    
-      //  let uid = user['_id'] ;
-      //  let token = jwt.sign({payload:uid},"helliio") ;
-      const token = user._id ;
+       let uid = user['_id'] ;
+       let token = jwt.sign({payload:uid},"helliio") ; 
       console.log(token) ;
-      // set.cookie('haile' , "pupu") ;
-       res.cookie('isloggedin' , "true" )  ;
-       
-           return res.json(
-          {
-            user
-          }
-        ) ;
+      res.cookie('Authorization' , token, ) ;
+  
+          return res.json
+      (
+         {
+          messege:'user has logged in' ,
+          userDetails:data
+         }
+       ) ;
        }
        else{ 
         console.log("error" ) ;
@@ -72,9 +71,18 @@ const Login = async (req, res) =>
 
 const Generate = async (req, res) =>
 {    
-    const {StudentName , rollNo , email, purpose , returnTime} = req.body ; 
+    // const {StudentName , rollNo , email, purpose , returnTime} = req.body ; 
      console.log("here he came ") ;
     try 
+<<<<<<< HEAD
+    {  
+       let token = req.cookies.Authorization ;   
+       console.log(req.cookies.Authorization);
+      //  console.log(token) ;
+       const decodeToken = jwt.verify(token , "helliio") ;
+       console.log(decodeToken) ;
+       const id = decodeToken.payload ;
+=======
     {   
        let user_id = req.cookies.user ;   
        console.log(user_id);
@@ -82,7 +90,7 @@ const Generate = async (req, res) =>
        {   
           const user = Pass.findById(user_id) ;
            const newPass = new Pass ({
-           name : user.name , 
+           name : StudentName , 
            rollNo : user.rollNo , 
            purpose: req.body.purpose , 
            email:  user.email , 
@@ -94,20 +102,23 @@ const Generate = async (req, res) =>
       console.log(token) ;
       // set.cookie('haile' , "pupu") ;
        res.cookie('isloggedin' , "true" )  ;
+>>>>>>> faf3fc1782a4872d2fa83f623afc9d95958ac069
        
-           return res.json(
+       const user = await student.findById(id).exec() ;
+       console.log(user) ;
+       if(user)
+         {  
+           res.json({data:user}) ;}
+        else 
           {
-           messege:'user has logged in' ,
-           userDetails:token
+               console.log("ni mil rahe ") ;
           }
-        ) ;
-
-
-      }
+      
+       
     }
-    catch(error)
+    catch(err)
     {
-        console.log(error) ;
+      console.log(err);
     }
 }
 
@@ -155,7 +166,25 @@ const deletePass = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+  const Gene = (req,res) => 
+  {
+      try{
+        console.log("aap gene mei hai") ;
+        const token = req.headers.Authorization ; 
+        console.log(token) ;
+        const decodeToken = jwt.verify(token , "heloo") ;
+        console.log(decodeToken) ;
+        const user = student.findById(decodeToken.payload) ;
+        console.log(user) ;
+        res.json({user}) ;
 
+        
+      }
+      catch(err)
+      {
+        console.log(err) ;
+      }
+  }
  
 app.get('/studgene' , protectroute)
 app.delete('/deletePass/:id', deletePass);
@@ -163,7 +192,7 @@ app.use('/' , userRouter) ;
 app.post('/auth/login' , Login ) ;
 // userRouter.delete(`/deletePass/:id` , deletePass) ;
 userRouter.get('/students', Passsend) ;
-userRouter.post('/generate', Generate) ;
+userRouter.get('/generate', Generate) ;
 
 
 

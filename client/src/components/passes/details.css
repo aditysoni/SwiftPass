@@ -1,27 +1,16 @@
-.pass-detail
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+<<<<<<< HEAD
+=======
+.error-box 
 {
-   position: flex;
-   flex-direction: row;
+   font-size: 100px ;
+   color:whitesmoke;
+   
 }
-.individual
-{
-   backgorund:yellow ;
-   padding : 10px ; 
-   position: flex;
-   flex-direction: column;
-}
-.detail-element
-{  
-   padding-top:10px;
-   position: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-}
-.detail-button {
- margin:20px;
- padding: 10px;
-}
+
 
 table
 {
@@ -33,24 +22,5 @@ table
    overflow : hidden ; 
    max-width: 90rem ;
 }
+>>>>>>> faf3fc1782a4872d2fa83f623afc9d95958ac069
 
-li , p , a , td 
-{
-   font-size: 2rem ; 
-   line-height: 2rem ;
-}
-thead{
-   font-size: 2rem;
-   background-color: #443C68;
-   color: #fff;
-}
-th , td 
-{
-   border: 1px solid #443C68;
-   min-width: 30rem;
-   padding : 1.5rem ;
-   line-height:2rem ;
-}
-td{
-   font-size: 1.6rem;
-}
