@@ -1,61 +1,70 @@
-import React, {useState } from 'react'
-import axios from 'axios' ;
-import {Link, Navigate, useNavigate}from 'react-router-dom' ;
-import './login.css' ;
+import { useState, react } from "react";
+import axios from 'axios'  ;
+import { Navigate , useNavigate } from "react-router-dom";
+const Register = ()  =>
+{   
 
-// import React from "react";
-import { TEInput, TERipple } from "tw-elements-react";
-// import { setLogin } from '../../state';
-// import {useDispatch} from 'react-redux' ; 
-// import { application } from 'express';
-
-
-const Login =() => 
-{    
-    const Navigate = useNavigate() ;
-    const [username , setUsername] = useState("") ;
+    const Navigate = useNavigate() ;    
+    const [name , setname] = useState("") ;
+    const [rollNo , setrollNo] = useState("") ;
+    const [phone , setPhone] = useState("") ;
+    const [role , setRole ] = useState("") ;
     const [password , setPassword] = useState("") ;
-    const [name , setName ] = useState("") ;
+    const [email , setemail ] = useState("") ;
 
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
+    const handlenameChange = (e) => {
+        setname(e.target.value);
       };
+
+     
+      const handlerollNoChange = (e) => {
+        setrollNo(e.target.value);
+      };
+      
+      const handleroleChange = (e) => {
+        setRole(e.target.value);
+      };
+
+      
+      const handlephoneChange = (e) => {
+        setPhone(e.target.value);
+      };
+
+      
+      const handlemailChange = (e) => {
+        setemail(e.target.value);
+      };
+      
     
       const handlePasswordChange = (e) => {
         setPassword(e.target.value);
       };
-      const config = {
-        headers: {"Content-Type" : "application/json"} ,
-        withCredentials:true 
+      
+      const Shift = () =>
+      {
+        Navigate('/') ;
       }
-      const shift  =() =>
-    {
-      Navigate('/register') ;
-    }
-      const handleLogin = async () => {
-        try {
-            const data = { username, password };
-            const User = await axios.post(
-              "http://localhost:8001/auth/login", data , 
-              config
-            );
-            console.log(User) ;
-            if(User.data.role == "student")  Navigate("/generate") ;
-            else Navigate('/faculty')
+
+      const handleRegister = async () => 
+      {
+        try { 
+
+            const data = { name , password , role , phone , email , rollNo};
+            const savedUserResponse = await axios.post(
+            "http://localhost:8001/register", data );
+            // console.log(savedUserResponse) ;
+             Navigate('http://localhost:3000') ;
             // alert(savedUserResponse) ;
             
-            
-    
-           
-        } catch (error) {
+        } 
+        catch (error) {
             console.log("An error occurred:", error.message);
         }
     };
-    
-     return (
-   
 
-   
+
+    return(
+          
 <div class="bg-white relative lg:py-20">
 <div class="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl
     xl:px-5 lg:flex-row">
@@ -68,15 +77,39 @@ const Login =() =>
     <div class="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
       <div class="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
           relative z-10">
-        <p class="w-full text-4xl font-medium text-center leading-snug font-serif">Lets get you Logged In</p>
+        <p class="w-full text-4xl font-medium text-center leading-snug font-serif">Lets get you Registered</p>
         <div class="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
           <div class="relative">
             <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
-                absolute">College Id</p>
-            <input placeholder="John" type="text" class="border placeholder-gray-400 focus:outline-none
+                absolute">Roll No.</p>
+            <input placeholder="20ume003" type="text" class="border placeholder-gray-400 focus:outline-none
                 focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-                border-gray-300 rounded-md" value = {username}onChange={handleUsernameChange}/>
+                border-gray-300 rounded-md" value = {rollNo}onChange={handlerollNoChange}/>
           </div>
+
+          <div class="relative">
+          <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+              absolute">Name</p>
+          <input placeholder="John" type="text" class="border placeholder-gray-400 focus:outline-none
+              focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+              border-gray-300 rounded-md" value = {name}onChange={handlenameChange}/>
+        </div>
+
+        <div class="relative">
+        <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+            absolute">Phone</p>
+        <input placeholder="09292929292" type="Number" class="border placeholder-gray-400 focus:outline-none
+            focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+            border-gray-300 rounded-md" value = {phone}onChange={handlephoneChange}/>
+      </div>
+
+      <div class="relative">
+      <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+          absolute">Email</p>
+      <input placeholder="20ume003@lnmiit.ac.in" type="text" class="border placeholder-gray-400 focus:outline-none
+          focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+          border-gray-300 rounded-md" value = {email}onChange={handlemailChange}/>
+    </div>
        
           <div class="relative">
             <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
@@ -85,15 +118,25 @@ const Login =() =>
                 focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                 border-gray-300 rounded-md" onChange={handlePasswordChange} value = {password}/>
           </div>
+
+          <div class="relative">
+          <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+              absolute">Role</p>
+          <input placeholder="student / faculty" type="text" class="border placeholder-gray-400 focus:outline-none
+              focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+              border-gray-300 rounded-md" onChange={handleroleChange} value = {role}/>
+        </div>
+
           <div class="relative">
             <a class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
-                rounded-lg transition duration-200 hover:bg-indigo-600 ease" onClick={handleLogin} >Submit</a>
+                rounded-lg transition duration-200 hover:bg-indigo-600 ease"  onClick={handleRegister}>Submit</a>
           </div>
 
           <div class="relative">
-          <a class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-l font-small text-center text-blue bg-white-900
-              rounded-lg " onClick={shift} >Submit</a>
+          <a class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
+              rounded-lg transition duration-200 hover:bg-indigo-600 ease"  onClick={Shift}>ALREADY A USER</a>
         </div>
+          
 
         </div>
       </div>
@@ -161,16 +204,8 @@ const Login =() =>
   </div>
 </div>
 </div>
-      
-     
-  )
+    )
 }
-       
-
-export default Login ;
 
 
-
-
-
- 
+export default Register ;

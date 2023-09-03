@@ -31,3 +31,30 @@ table
 }
 
 
+.items
+{  
+   padding-left:80px ;
+   
+}
+
+.searchbar 
+{  margin-top: 20px;
+   height:30px ; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+}
+
+.searching {
+   
+   
+      width: 500px ;
+      border: 3px solid blue;
+      /* border-right: none; */
+      padding: 5px;
+      height: 35px;
+      border-radius: 5px ;
+      outline: none;
+
+}
