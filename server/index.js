@@ -2,6 +2,7 @@ const express = require('express') ;
 const mongoose = require('mongoose') ;
 const cors = require('cors') ;
 const jwt = require('jsonwebtoken') ;
+const sendMail = require('./controller/sendMail') ;
 const cookieParser = require('cookie-parser') ;
 // const User = require('./model/StudentSchema') ;
 // const Connection = require('./db/db');
@@ -10,6 +11,8 @@ const app = express();
 const student = require('./model/StudentSchema')
 const userRouter = express.Router() ;
 app.use(express.json()) ;
+const Register = require('./controller/register') ;
+// import {Register} from './controller/register' ;
 app.use("*" , cors({
   origin:true , 
   credentials:true ,
@@ -29,13 +32,15 @@ const connection = async ()  =>
 });}
 
 connection() ;
+
+
 const Login = async (req, res) =>
 {    
   console.log("hey there") ;
   try{ 
    let data = req.body ;
-   let user = await student.findOne({ name : data.username}) ;
-   
+   let user = await student.findOne({ name: data.username}) ;
+   console.log(user) ;
    if (user){
        if(user.password == data.password)
        {
@@ -45,13 +50,7 @@ const Login = async (req, res) =>
       console.log(token) ;
       res.cookie('Authorization' , token, ) ;
   
-          return res.json
-      (
-         {
-          messege:'user has logged in' ,
-          userDetails:data
-         }
-       ) ;
+          return res.json(  user ) ;
        }
        else{ 
         console.log("error" ) ;
@@ -68,13 +67,11 @@ const Login = async (req, res) =>
    }
 }
 
-
+//--------------------------------------
 const Generate = async (req, res) =>
-{    
-    // const {StudentName , rollNo , email, purpose , returnTime} = req.body ; 
+{   
      console.log("here he came ") ;
-    try 
-<<<<<<< HEAD
+     try 
     {  
        let token = req.cookies.Authorization ;   
        console.log(req.cookies.Authorization);
@@ -82,46 +79,43 @@ const Generate = async (req, res) =>
        const decodeToken = jwt.verify(token , "helliio") ;
        console.log(decodeToken) ;
        const id = decodeToken.payload ;
-=======
+
     {   
+
        let user_id = req.cookies.user ;   
        console.log(user_id);
+       const goings = user_id.NoOfGoings + 1 ;
+
        if (user_id)
        {   
-          const user = Pass.findById(user_id) ;
-           const newPass = new Pass ({
-           name : StudentName , 
+          const user = student.findById(user_id).exec() ;
+          const newPass = new Pass ({
+           name : user.name, 
            rollNo : user.rollNo , 
            purpose: req.body.purpose , 
            email:  user.email , 
-           returnTime : req.body.returnTime , 
+           returnTime : req.body.returnTime ,
+           NoOgGoings: goings, 
         })
-       newPass.save(); 
+       await newPass.save(); 
        console.log("saved") ;
-       const token = user._id ;
-      console.log(token) ;
-      // set.cookie('haile' , "pupu") ;
-       res.cookie('isloggedin' , "true" )  ;
->>>>>>> faf3fc1782a4872d2fa83f623afc9d95958ac069
-       
-       const user = await student.findById(id).exec() ;
        console.log(user) ;
-       if(user)
+       if(newPass)
          {  
-           res.json({data:user}) ;}
-        else 
+           res.json( newPass) ;}
+          else 
           {
-               console.log("ni mil rahe ") ;
+            console.log(" cant save the pass") ;
           }
-      
-       
     }
+  }
+}
     catch(err)
     {
       console.log(err);
     }
 }
-
+//-----------------------------------------------------------------
 const Passsend = async(req,res)=>
 {
     try {
@@ -166,33 +160,53 @@ const deletePass = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
-  const Gene = (req,res) => 
+  const PassDetails = async(req,res) => 
   {
-      try{
-        console.log("aap gene mei hai") ;
-        const token = req.headers.Authorization ; 
-        console.log(token) ;
-        const decodeToken = jwt.verify(token , "heloo") ;
-        console.log(decodeToken) ;
-        const user = student.findById(decodeToken.payload) ;
-        console.log(user) ;
-        res.json({user}) ;
+      try
+      {
+        let token = req.cookies.Authorization ;   
+      //  console.log(req.cookies.Authorization);
+       const decodeToken = jwt.verify(token , "helliio") ;
+       console.log(decodeToken) ;
+       const id = decodeToken.payload ;
+       const stud= student.findById(id) ;
+       console.log(stud) ;
+       const rollNo = stud.rollNo ;
 
-        
+       const passes = await Pass.find({rollNo : rollNo});
+       console.log(passes) ;
+       if(passes)
+       {
+        res.json(passes) ;
+       }
       }
       catch(err)
       {
+        res.json("error , please try again later") ;
         console.log(err) ;
       }
   }
+const Authorize = async (req, res ) => 
+{ 
+
+  const pass = await Pass.findById(req.body.pass_id) ;
+  pass.status = req.body.status ;
+  sendMail(pass) ;
+
+}
  
+
+
+app.post('/register' , Register) ;
 app.get('/studgene' , protectroute)
 app.delete('/deletePass/:id', deletePass);
 app.use('/' , userRouter) ; 
 app.post('/auth/login' , Login ) ;
-// userRouter.delete(`/deletePass/:id` , deletePass) ;
+userRouter.delete(`/deletePass/:id` , deletePass) ;
 userRouter.get('/students', Passsend) ;
 userRouter.get('/generate', Generate) ;
+userRouter.get('/passes' , PassDetails) ;
+
 
 
 

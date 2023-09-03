@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import  './details.css' ;
-
-
-  const Details = () => {
-    
-    const [value , setValue] = useState("") ;
+const Details = () =>
+{  
+  
+  const [value , setValue] = useState("") ;
   const [students, setStudents] = useState([]);
   const [error, setError] = useState(null);
 
   const [input , setInput] = useState("") ;
 
-const removePass = async(id) => 
+const updatePass= async(id) => 
 {
       try
-       {  
+       { 
+         
          console.log("delete");
          const res = await axios.delete(`http://localhost:8000/deletePass/${id}`) ;
          setStudents(res.data.body) ;
@@ -27,17 +27,14 @@ const removePass = async(id) =>
   }
 
   async function searching(e) 
-{  
+{ 
   try {
-  
     setInput(e.target.value) ;
     const response = await axios.get('http://localhost:8001/students');
     const  results = response.data.body.filter((response) =>
   {
-        return response && response.name &&response.name.toLowerCase().includes(input.toLowerCase()) ;
-
+    return response && response.name &&response.name.toLowerCase().includes(input.toLowerCase()) ;
   })
-
   // setInput(e.target.value) ;
   console.log(results) ;
   setStudents(results) ;
@@ -45,17 +42,17 @@ const removePass = async(id) =>
 }
 catch(err)
 {
-
-  
+    console.log( err) ;
+}
+}
    async function fetchData() 
-
+{
         console.log(error);
         setError("Sorry");
-
 }
 
-}
-  
+
+
    async function fetchData(e) 
 
    {
@@ -67,62 +64,128 @@ catch(err)
         setStudents(response.data.body);
        
       } 
-        catch (error) {
+        catch (error) 
+        {
         console.log(error);
         setError("Sorry");
-      }
+        }
     }
     
 
-  useEffect( () => {
-    fetchData();
+  useEffect( () => 
+  {
+    // fetchData();
   }, []);
 
-  return (
-    <div>
+
+
+    return (  
+ <>       
+ 
+<div className = "searchbar"> 
+<input className= "searching" placeholder ="Search here" onChange = {searching}/>
+</div>
+
+
+
+<div className="bg-gray-50 min-h-screen">
+
+<div>
+  <div className="p-4">
+    <div className="bg-white p-4 rounded-md">
       <div>
-      <input placeholder='serach'value={input} onChange= {searching}/>
+        <h2 className="mb-4 text-3xl font-bold text-gray-700">STUDENT PASSESS</h2>
+        <h2 className="mb-4 text-l font-bold text-gray-700">TOTAL STUDENTS OUTSIDE OF THE CAMPUS = ? </h2>
+        <div>
+          <div>
+            <div className="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+              <div>
+                <span>Name</span>
+              </div>
+              <div>
+                <span>Email</span>
+              </div>
+              <div>
+                <span>Role</span>
+              </div>
+              <div>
+                <span>Time</span>
+              </div>
+              <div>
+                <span>Edit</span>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
+                <div className="px-2 flex">
+                  <span>John Deo</span>
+                </div>
+                <div>
+                  <span>johndeo@gmail.com</span>
+                </div>
+                <div className="px-2">
+                  <span>Admin</span>
+                </div>
+                <div className="px-2">
+                  <span>28/12/2021</span>
+                </div>
+                <div className="px-2">
+                  <select>
+                    <option>Admin</option>
+                    <option>User</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
+                <div className="px-2">
+                  <span>John Deo</span>
+                </div>
+                <div>
+                  <span>johndeo@gmail.com</span>
+                </div>
+                <div className="px-2">
+                  <span>Admin</span>
+                </div>
+                <div className="px-2">
+                  <span>28/12/2021</span>
+                </div>
+                <div className="px-2">
+                  <select>
+                    <option>Admin</option>
+                    <option>User</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
+                <div className="px-2">
+                  <span>John Deo</span>
+                </div>
+                <div>
+                  <span>johndeo@gmail.com</span>
+                </div>
+                <div className="px-2">
+                  <span>Admin</span>
+                </div>
+                <div className="px-2">
+                  <span>28/12/2021</span>
+                </div>
+                <div className="px-2">
+                  <select>
+                    <option>Admin</option>
+                    <option>User</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {error ? (
-        <div className='error-box'>{error}</div>
-      ) : (
-        <table>
-        <div> 
-          
-        {students.map(student => (
-         <div  key={student._id}> 
-         <thead> 
-         <tr> 
-       
-          <th>Name</th>
-          <th>Roll No</th>
-          <th>email</th>
-          <th>Return Time </th>
-          <th>Update</th>
-          </tr>
-        </thead> 
-        <tbody>
-          <tr keys = {student.id}>
-       
-           <td>{student.name}</td>
-           <td>{student.rollNo}</td>
-           <td>{student.email}</td>
-           <td>{student.returnTime}</td>
-           <td><button className="detail-button"onClick = {() => removePass(student._id)}> click me </button></td>
-          </tr>
-        </tbody>
-        </div>
-      ))}
-        </div>
-        </table>
-        
-      )}
     </div>
-    
-    
-   
-  );
-};
+  </div>
+</div>
+</div>
 
-export default Details;
-
+</>
+)
+}
+export default Details ;

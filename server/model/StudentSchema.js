@@ -1,26 +1,35 @@
 // import mongoose from "mongoose";
-const mongoose = require('mongoose')  ;
-
-
+const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    // rollNo :{
-    //     type : String , 
-    //     required: true 
+    rollNo :{
+        type : String , 
 
-    // } ,
-    // email: { 
+    } ,
+    email: { 
         
-    //     type: String,
-    //     default: false
-    // },
+        type: String,
+        
+    },
     password: {
       type: String , 
-      required:true 
+      
     }, 
+    phone : {
+      type: Number
+    } , 
+
+    role :
+    {
+      type:String
+    } ,
+    NoOfGoings : {
+      type :  Number, 
+      default : 0 
+    }
     
 })
 

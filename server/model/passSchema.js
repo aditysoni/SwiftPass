@@ -21,11 +21,14 @@ const PassSchema = new mongoose.Schema({
     type:String 
     
     } , 
-    time : {
-        type: Date
-    }, 
     returnTime : {
         type : String
+    },
+
+    status: {
+        type:String , 
+        enum:['authorized ' , 'notAuthorized' , 'pending'] ,
+        default: 'pending' 
     }
 })
 
