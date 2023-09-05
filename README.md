@@ -1,5 +1,7 @@
 # SwiftPass
 
+A web application where students can request the outpass generation easily 
+
 **Frontend**:
 - **Technology Stack**:
   - Built with **ReactJS** and **JavaScript**.
@@ -23,10 +25,10 @@
 
 3. **Student Page**:
    - Students can request passes through this page.
-4. **Passes**
+
+4. **Passes Page**
    - Students can view the status of the pass and can also see the pass history like how much pass they have requested for and their respective details . 
 
 4. **Faculty Page**:
    - Faculty members have access to a page displaying pass requests with details.
    - They can filter requests based on the "pending" status and approve or disapprove them.
-
