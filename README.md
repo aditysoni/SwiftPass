@@ -1,4 +1,5 @@
 # SwiftPass
+
 A web application where students can request the outpass generation easily 
 
 **Frontend**:
@@ -24,11 +25,10 @@ A web application where students can request the outpass generation easily
 
 3. **Student Page**:
    - Students can request passes through this page.
-   - They can also view their pass history, including details like request date.
+
+4. **Passes Page**
+   - Students can view the status of the pass and can also see the pass history like how much pass they have requested for and their respective details . 
 
 4. **Faculty Page**:
    - Faculty members have access to a page displaying pass requests with details.
    - They can filter requests based on the "pending" status and approve or disapprove them.
-5  **Passess Page**
-    -Passess page where the students can view tha passess they have so far requested with the details of it .  
-
