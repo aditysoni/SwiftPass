@@ -1,0 +1,29 @@
+.logout 
+{
+    width:90px ;
+    height:50px ;
+    background-color: rgb(125, 9, 207);
+    /* margin-top:300px ; */
+    top:70px; 
+    font-size: 20px ;
+    position: relative;
+    border-radius: 10px;
+     margin-left: 1260px;
+    /* position: absolute; */
+    /* margin-top: 30px; */
+}
+
+
+.history
+{   font-size: 20px;
+    width:90px ;
+    height:50px ;
+    background-color: rgb(125, 9, 207);
+    /* margin-top:300px ; */
+    top:120px; 
+    position: relative;
+    border-radius: 10px;
+     margin-left: 1130px;
+    /* position: absolute; */
+    /* margin-top: 30px; */
+}

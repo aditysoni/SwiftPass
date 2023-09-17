@@ -38,33 +38,70 @@ const Login = async (req, res) =>
 {    
   console.log("hey there") ;
   try{ 
-   let data = req.body ;
+   let data = req.body;
    let user = await student.findOne({ name: data.username}) ;
    console.log(user) ;
-   if (user){
+   if (user)
+   {
        if(user.password == data.password)
        {
-        console.log("heloo") ;
+       console.log("heloo") ;
        let uid = user['_id'] ;
        let token = jwt.sign({payload:uid},"helliio") ; 
       console.log(token) ;
       res.cookie('Authorization' , token, ) ;
-  
-          return res.json(  user ) ;
+       res.json({data:user}) ; 
        }
        else{ 
-        console.log("error" ) ;
-        res.json({
-           messege:'wrong credintials '
-       }) ;
+        console.log("error") ;
+        res.json(user) ;
       }
-
-   }}
+   }
+  else
+  {
+    console.log("noone of this name is there") ;
+    res.json(user);
+  }
+}
    catch(err){
       return res.json({
            messege:'fucked'
        });
    }
+}
+
+const Authorzie = (req, res) =>
+{
+   const sta = req.body ;
+   
+
+} 
+
+const getdetail = async(req, res)=>
+{
+  console.log("here he came ") ;
+  try 
+ {  
+    let token = req.cookies.Authorization ;   
+    console.log(req.cookies.Authorization);
+   //  console.log(token) ;
+    const decodeToken = jwt.verify(token , "helliio") ;
+    console.log(decodeToken) ;
+    const id = decodeToken.payload ;
+    let user_id = req.cookies.user ;   
+    console.log(id);
+    // const goings = user_id.NoOfGoings + 1 ;
+
+    if (id)
+    {   
+       const user = await student.findById(id) ;
+       console.log(user) ;
+       res.json({data:user}) ;
+}
+}
+ catch(err)
+ {console.log(err) ; 
+res.json("failed"); }
 }
 
 //--------------------------------------
@@ -79,21 +116,20 @@ const Generate = async (req, res) =>
        const decodeToken = jwt.verify(token , "helliio") ;
        console.log(decodeToken) ;
        const id = decodeToken.payload ;
+      //  let user_id = req.cookies.user ;   
+       console.log(id);
+      
 
-    {   
-
-       let user_id = req.cookies.user ;   
-       console.log(user_id);
-       const goings = user_id.NoOfGoings + 1 ;
-
-       if (user_id)
+       if (id)
        {   
-          const user = student.findById(user_id).exec() ;
+          const user = await student.findById(id).exec() ;
+          const goings = user.NoOfGoings + 1 ;
           const newPass = new Pass ({
            name : user.name, 
            rollNo : user.rollNo , 
            purpose: req.body.purpose , 
            email:  user.email , 
+           phone: user.phone , 
            returnTime : req.body.returnTime ,
            NoOgGoings: goings, 
         })
@@ -107,7 +143,6 @@ const Generate = async (req, res) =>
           {
             console.log(" cant save the pass") ;
           }
-    }
   }
 }
     catch(err)
@@ -120,10 +155,15 @@ const Passsend = async(req,res)=>
 {
     try {
         const data = await Pass.find() ;
-        res.json({body : data}) ;
-        console.log("passed") ;
+        // console.log(data);
+        // data.data.map(pass=>{console.log(pass.email)})
+        // console.log(data.email) ;
+        data.map(pass=>{console.log(pass.email) ;}) ;
+        res.json(data) ;
+        console.log(data);
     }catch{console.log("data pass")}
 }
+
 const protectroute = async (req, res) =>
 { 
   console.log("oki") ;
@@ -188,13 +228,16 @@ const deletePass = async (req, res) => {
   }
 const Authorize = async (req, res ) => 
 { 
-
+  try
+ { 
   const pass = await Pass.findById(req.body.pass_id) ;
   pass.status = req.body.status ;
-  sendMail(pass) ;
-
+  sendMail(pass) ; 
+ }
+  catch(err) {console.log(err) ;}
 }
  
+
 
 
 app.post('/register' , Register) ;
@@ -204,8 +247,10 @@ app.use('/' , userRouter) ;
 app.post('/auth/login' , Login ) ;
 userRouter.delete(`/deletePass/:id` , deletePass) ;
 userRouter.get('/students', Passsend) ;
-userRouter.get('/generate', Generate) ;
+userRouter.post('/generate', Generate) ;
+userRouter.get('/generate' , getdetail) ;
 userRouter.get('/passes' , PassDetails) ;
+userRouter.get('/authorzie' , Authorize) ;
 
 
 

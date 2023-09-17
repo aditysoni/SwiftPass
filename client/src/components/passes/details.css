@@ -2,43 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-.error-box 
-{
-   font-size: 100px ;
-   color:whitesmoke;
+
+.header
+  
+{  margin-top: 90px;
+      margin-bottom: 50px;
+   height:30px ;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    
 }
 
-
-.error-box 
+.title
 {
-   font-size: 100px ;
-   color:whitesmoke;
-   
+      font-size: 120px;
+      font-weight: 800;
+      color: rgb(47, 6, 86);
+      justify-content: center;
+      align-items: center;
 }
-
-
-
-table
-{
-   margin : 5rem auto ; 
-   border-radius: 2rem ;
-   border:1rem hidden #443C68 ;
-   border-collapse: collapse;
-   box-shadow: 0 0 0 1px black ;
-   overflow : hidden ; 
-   max-width: 90rem ;
-}
-
-
-.items
-{  
-   padding-left:80px ;
-   
-}
-
 .searchbar 
-{  margin-top: 20px;
+{  margin-top: 50px;
    height:30px ; 
    display: flex;
    justify-content: center;
@@ -50,7 +35,7 @@ table
    
    
       width: 500px ;
-      border: 3px solid blue;
+      border: 3px solid rgb(47, 6, 86);
       /* border-right: none; */
       padding: 5px;
       height: 35px;

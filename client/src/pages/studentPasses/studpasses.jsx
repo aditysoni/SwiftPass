@@ -39,59 +39,211 @@ const StudentPasses = () =>
 
 
       return (
+<>
 
-<div className="bg-gray-50 min-h-screen">
-
-<div>
-  <div className="p-4">
-    <div className="bg-white p-4 rounded-md">
+<div className="header">
+<h1 className="title">
+ OUTPASS HISTORY
+</h1>
+</div>
+            
+  <div>
+  <div class="p-4">
+    <div class="bg-white p-4 rounded-md">
       <div>
-        <h2 className="mb-4 text-3xl font-bold text-gray-700"> OUTPASS</h2>
-        <h2 className="mb-4 text-l font-bold text-gray-700">Times you went out of the campus = ? </h2>
         <div>
           <div>
-            <div className="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+            <div class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-5 px-4 text-white font-bold text-2xl">
               <div>
                 <span>Name</span>
-              </div>
-              <div>
-                <span>Email</span>
               </div>
               <div>
                 <span>Phone</span>
               </div>
               <div>
-                <span>Return Time</span>
+                <span>Purpose</span>
               </div>
-              
+              <div>
+                <span> Date/Time</span>
+              </div>
               <div>
                 <span>Status</span>
               </div>
             </div>
             <div>
+            
 
-              <div className="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                  {passess.map(pass => (
-                  <div  key={   pass._id}>
-                <div className="px-2 flex">
-                  <span>{pass.name}</span>
+              
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
                 </div>
                 <div>
-                  <span>{pass.email}</span>
+                  <span>suyashagrahari@gmail.com</span>
                 </div>
-                <div className="px-2">
-                  <span>{pass.phone}</span>
+                <div class="px-2 flex">
+                  <span>Dinner</span>
                 </div>
-                <div className="px-2">
-                  <span>{pass.returnTime}</span>
+                <div class="px-2">
+                  <span>7/8/23 : 12.00 PM</span>
                 </div>
-                <div className="px-2">
-                 <span>{pass.status}</span>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
                 </div>
-              
-            </div>
-      ))} 
-            </div>
+              </div>
+
+                
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Shopping</span>
+                </div>
+                <div class="px-2">
+                  <span>15/5/2023 : 7.00 PM</span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+                
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Eat chaap</span>
+                </div>
+                <div class="px-2">
+                  <span>--:--:-- || --:--:-- </span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Buy books</span>
+                </div>
+                <div class="px-2">
+                  <span>21/08/23 : 9.00 PM</span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Thadi</span>
+                </div>
+                <div class="px-2">
+                  <span>25/08/23 : 8.00 PM</span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Party</span>
+                </div>
+                <div class="px-2">
+                  <span>--:--:-- || --:--:-- </span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Eat chaap</span>
+                </div>
+                <div class="px-2">
+                  <span>13/08/23 : 9.00 PM</span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-between border-t  text-xl font-normal mt-4 space-x-4">
+                <div class="px-2 flex">
+                  <span>Suyash </span>
+                </div>
+                <div>
+                  <span>suyashagrahari@gmail.com</span>
+                </div>
+                <div class="px-2 flex">
+                  <span>Medical problem</span>
+                </div>
+                <div class="px-2">
+                  <span>9/08/23 : 6.00 PM</span>
+                </div>
+                <div class="px-2">
+                  <select>
+                    <option>APPROVED</option>
+                    <option>NOT APPROVED</option>
+                  </select>
+                </div>
+              </div>
+
+            
             </div>
           </div>
         </div>
@@ -99,7 +251,7 @@ const StudentPasses = () =>
     </div>
   </div>
 </div>
-</div>
+  </>
 
   
            

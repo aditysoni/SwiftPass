@@ -14,7 +14,7 @@ const PassSchema = new mongoose.Schema({
     email: { 
         
         type: String,
-        default: false
+        
     },
    
     purpose:{

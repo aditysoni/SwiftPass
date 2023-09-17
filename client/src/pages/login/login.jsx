@@ -15,7 +15,7 @@ const Login =() =>
     const Navigate = useNavigate() ;
     const [username , setUsername] = useState("") ;
     const [password , setPassword] = useState("") ;
-    const [name , setName ] = useState("") ;
+    const [name , setName ] = useState("") ; 
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -40,12 +40,13 @@ const Login =() =>
               config
             );
             console.log(User) ;
-            if(User.data.role == "student")  Navigate("/generate") ;
-            else Navigate('/faculty')
-            // alert(savedUserResponse) ;
-            
-            
-    
+            console.log(User.data.data.role) ;
+            if(User.data.data.role == null) Navigate('/register') ;
+            const role = User.data.data.role ;
+             if(role == "student")  Navigate("/generate") ;
+            // else if (role == "faculty")  Navigate('/faculty') ;
+            // Navigate('/register') ;
+            // alert(savedUserResponse) 
            
         } catch (error) {
             console.log("An error occurred:", error.message);
